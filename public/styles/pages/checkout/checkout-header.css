@@ -1,0 +1,87 @@
+.checkout-header{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 60px;
+    padding: 0 30px;
+    z-index: 999;
+}
+.checkout-header .header-contents{
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+}
+.header-left{
+    display: flex;
+    justify-content: left;
+    align-items: center;  
+    flex-shrink: 0;
+    width: 150px;
+}
+.home-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.amazon-logo{
+    padding-top: 8px;
+    width: 100px;
+}
+.amazon-logo-mobile{
+    display: none;
+    height: 35px;
+}
+.header-middle{
+    flex: 1;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+.header-middle .return-to-products-link{
+    color: rgb(0, 113, 133);
+    font-size: 23px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.header-right{
+    text-align: right;
+    width: 150px;
+}
+@media (max-width:1000px){
+    .header-left{
+        width: auto;
+    }
+    .checkout-header .header-middle{
+        font-size: 20px;
+        padding-right: 10px;
+    }
+    .header-middle .return-to-products-link{
+        font-size: 18px;
+    }
+    .header-right{
+        width: auto;
+    }
+}
+@media (max-width:575px){
+    .amazon-logo{
+        display: none;
+    }
+    .amazon-logo-mobile{
+        display: block;
+        width: auto;
+    }
+    .checkout-header .header-middle{
+        padding-left: 5px;
+    }
+}

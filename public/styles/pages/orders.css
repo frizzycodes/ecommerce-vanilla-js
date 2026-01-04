@@ -1,0 +1,236 @@
+body {
+  height: 5000px;
+}
+.orders-main {
+  max-width: 850px;
+  margin-top: 90px;
+  margin-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.orders-main .page-title {
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 25px;
+  white-space: nowrap;
+}
+.orders-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 50px;
+}
+.orders-grid.is-empty {
+  display: initial;
+}
+.orders-grid .view-products-link {
+  display: inline-block;
+  padding: 8px 15px;
+  text-decoration: none;
+  margin-top: 10px;
+  color: rgb(33, 33, 33);
+  background-color: rgb(255, 216, 20);
+  border: 1px solid rgb(252, 210, 0);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+.orders-grid .view-products-link:hover {
+  background-color: rgb(247, 202, 0);
+  border: 1px solid rgb(242, 194, 0);
+}
+.orders-grid .view-products-link:active {
+  background: rgb(255, 216, 20);
+  border-color: rgb(252, 210, 0);
+  box-shadow: none;
+}
+.order-container .order-header {
+  background-color: rgb(240, 242, 242);
+  border: 1px solid rgb(213, 217, 217);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  gap: 45px;
+}
+.order-header .left-section {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  flex-shrink: 0;
+}
+.order-date-container,
+.order-id-container,
+.order-price-container {
+  display: flex;
+  flex-direction: column;
+  user-select: text;
+}
+.order-header .right-section {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+}
+.order-header .order-header-label {
+  font-weight: 500;
+  white-space: nowrap;
+}
+.order-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 60px;
+  padding: 40px 25px;
+  border: 1px solid rgb(213, 217, 217);
+  border-top: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.order-item {
+  display: grid;
+  grid-template-columns: 110px 1fr 220px;
+  column-gap: 35px;
+  align-items: center;
+}
+.order-item-image {
+  text-align: center;
+}
+.order-item-image img {
+  max-width: 110px;
+  max-height: 110px;
+  flex-shrink: 0;
+}
+.order-item-name {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.order-item-delivery-date {
+  margin-bottom: 3px;
+}
+.order-item-quantity {
+  margin-bottom: 8px;
+}
+.buy-again-button {
+  font-size: 15px;
+  width: 140px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(33, 33, 33);
+  background-color: rgb(255, 216, 20);
+  border: 1px solid rgb(252, 210, 0);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+  gap: 15px;
+}
+.buy-again-button:hover {
+  background-color: rgb(247, 202, 0);
+  border: 1px solid rgb(242, 194, 0);
+}
+.buy-again-button:active {
+  background: rgb(255, 216, 20);
+  border-color: rgb(252, 210, 0);
+  box-shadow: none;
+}
+.buy-again-button .buy-again-icon {
+  width: 25px;
+}
+.buy-again-label {
+  display: initial;
+}
+.buy-again-success {
+  display: none;
+}
+.order-item-action {
+  align-self: start;
+}
+.track-package-button {
+  color: rgb(33, 33, 33);
+  background: white;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+  width: 100%;
+  font-size: 15px;
+  padding: 8px;
+}
+.track-package-button:hover {
+  background-color: #f7fafa;
+}
+.track-package-button:active {
+  background-color: #edfdff;
+  box-shadow: none;
+}
+@media (max-width: 800px) {
+  .order-details-grid {
+    row-gap: 30px;
+  }
+  .order-item {
+    grid-template-columns: 110px 1fr;
+  }
+  .buy-again-button {
+    margin-bottom: 10px;
+  }
+  .order-item-action {
+    grid-column: 2;
+  }
+  .track-package-button {
+    width: 140px;
+  }
+}
+@media (max-width: 575px) {
+  .order-container .order-header {
+    padding: 15px;
+  }
+  .order-container .order-header,
+  .order-header .left-section {
+    flex-direction: column;
+    gap: 0;
+    align-items: start;
+    line-height: 23px;
+  }
+  .order-header .order-date-container,
+  .order-header .order-price-container,
+  .order-container .order-id-container {
+    flex-direction: row;
+    gap: 5px;
+  }
+}
+@media (max-width: 450px) {
+  .order-details-grid {
+    row-gap: 70px;
+  }
+  .order-item {
+    grid-template-columns: 1fr;
+  }
+  .order-item-action {
+    grid-column: 1;
+  }
+  .order-item-image {
+    margin-bottom: 25px;
+  }
+  .order-item-image img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  .order-item-name {
+    margin-bottom: 10px;
+  }
+  .order-item-quantity {
+    margin-bottom: 15px;
+  }
+  .buy-again-button {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .track-package-button {
+    width: 100%;
+    padding: 12px;
+  }
+}

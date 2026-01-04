@@ -1,0 +1,34 @@
+{
+  "orders": [
+    {
+      "createdTime": "2026-01-02T10:22:55.871Z",
+      "items": [
+        {
+          "productID": "3ebe75dc-64d2-4137-8860-1f5a963e534b",
+          "productName": "6 Piece White Dinner Plate Set",
+          "quantity": 1,
+          "unitPriceCents": 2067,
+          "lineSubTotalCents": 2067,
+          "itemShippingCost": 0,
+          "estimatedDeliveryDate": "2026-01-11T10:22:55.871Z"
+        },
+        {
+          "productID": "8c9c52b5-5a19-4bcb-a5d1-158a74287c53",
+          "productName": "6-Piece Nonstick, Carbon Steel Oven Bakeware Baking Set",
+          "quantity": 1,
+          "unitPriceCents": 3499,
+          "lineSubTotalCents": 3499,
+          "itemShippingCost": 0,
+          "estimatedDeliveryDate": "2026-01-11T10:22:55.871Z"
+        }
+      ],
+      "totals": {
+        "itemsSubTotalCents": 5566,
+        "totalShippingCostCents": 0,
+        "totalTaxCents": 56,
+        "grandTotalCents": 5622
+      },
+      "orderId": "4d26248d-3270-49a7-8e4b-1f5ebafcfdd3"
+    }
+  ]
+}

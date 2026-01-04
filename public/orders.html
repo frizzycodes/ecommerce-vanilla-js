@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/shared/general.css" />
+    <link rel="stylesheet" href="styles/shared/amazon-header.css" />
+    <link rel="stylesheet" href="styles/pages/orders.css" />
+    <title>Orders</title>
+  </head>
+  <body>
+    <header>
+      <nav class="amazon-header js-amazon-header">
+        <div class="header-left">
+          <a class="home-link header-link" href="amazon.html">
+            <img
+              class="amazon-logo"
+              src="images/amazon-logo-white.png"
+              alt="AMAZON"
+            />
+            <img
+              class="amazon-logo-mobile"
+              src="images/amazon-mobile-logo-white.png"
+              alt="AMAZON"
+            />
+          </a>
+        </div>
+        <div class="header-middle">
+          <form class="header-search js-search-form">
+            <input
+              class="search-bar js-search-bar"
+              type="text"
+              placeholder="Search"
+            />
+            <button type="button" class="search-button js-search-button">
+              <img
+                class="search-icon"
+                src="images/icons/search-icon.png"
+                alt="SEARCH"
+              />
+            </button>
+          </form>
+        </div>
+        <div class="header-right">
+          <button class="hamburger-menu js-hamburger-menu">
+            <img
+              class="hamburger-icon"
+              src="images/icons/hamburger-menu.png"
+              alt="HamburgerMenu"
+            />
+          </button>
+          <ul class="header-nav-links js-dropdown-menu">
+            <li>
+              <a class="orders-link header-link" href="orders.html">
+                Returns
+                <span>& Orders</span>
+              </a>
+            </li>
+            <li>
+              <a class="cart-link header-link" href="checkout.html">
+                <img
+                  class="cart-icon"
+                  src="images/icons/cart-icon.png"
+                  alt="CART"
+                />
+                <span class="cart-text">Cart</span>
+                <span class="cart-quantity js-cart-quantity"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="orders-main js-orders-main">
+      <div class="page-title js-page-title">Your Orders</div>
+      <section class="orders-grid js-orders-grid"></section>
+    </main>
+
+    <script src="scripts/ordersPage.js" type="module"></script>
+  </body>
+</html>

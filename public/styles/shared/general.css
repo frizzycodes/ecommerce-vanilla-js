@@ -1,0 +1,32 @@
+body {
+  margin: 0px;
+  font-family: Roboto, Arial;
+  height: auto;
+  color: rgb(33, 33, 33);
+  user-select: none;
+}
+input,
+select,
+button {
+  font-family: Roboto, Arial;
+}
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+img {
+  overflow: clip;
+}
+button {
+  cursor: pointer;
+}
+
+.limit-to-2-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-clamp: 2; /* future-proof unprefixed version */
+  max-block-size: calc(2 * 1.2em); /* fallback for old browsers */
+  line-height: 1.2em;
+}
