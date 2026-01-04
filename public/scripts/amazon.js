@@ -35,7 +35,7 @@ export function renderProducts(products) {
     productsHtml += `
             <div class="product-container" data-product-id = "${product.id}">
                 <div class="product-image-container">
-                    <img class="product-image" src=/"${product.image}" alt="">
+                    <img class="product-image" src="/${product.image}" alt="">
                 </div>
                 <div class="product-name js-product-name limit-to-2-lines">
                     ${product.name}
