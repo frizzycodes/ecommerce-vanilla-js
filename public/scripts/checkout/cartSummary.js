@@ -37,7 +37,7 @@ export function renderCartSummary() {
                             <span class=""></span>
                         </div>
                         <div class="cart-item-details-grid">
-                            <img class="cart-item-image" src="${
+                            <img class="cart-item-image" src=/"${
                               cartItemInfo.image
                             }" alt="">    
                             <div class="cart-item-details">

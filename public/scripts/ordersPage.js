@@ -32,7 +32,7 @@ function renderOrders(orders) {
         <div class="order-item">
           <div class="order-item-image">
             <img
-              src="${product.image}"
+              src="/${product.image}"
               alt=""
             />
           </div>
@@ -53,7 +53,7 @@ function renderOrders(orders) {
             }>
               <img
                 class="buy-again-icon"
-                src="images/icons/buy-again.png"
+                src="/images/icons/buy-again.png"
                 alt=""
               />
               <span class="buy-again-label js-buy-again-label">Buy it again</span>

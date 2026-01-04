@@ -35,13 +35,13 @@ export function renderProducts(products) {
     productsHtml += `
             <div class="product-container" data-product-id = "${product.id}">
                 <div class="product-image-container">
-                    <img class="product-image" src="${product.image}" alt="">
+                    <img class="product-image" src=/"${product.image}" alt="">
                 </div>
                 <div class="product-name js-product-name limit-to-2-lines">
                     ${product.name}
                 </div>
                 <div class="product-raiting-container">
-                    <img class="product-raiting-stars" src="${product.getRatingStarsUrl()}" alt="">
+                    <img class="product-raiting-stars" src="/${product.getRatingStarsUrl()}" alt="">
                     <div class="product-raiting-count">
                         ${product.rating.count}
                     </div>
@@ -66,7 +66,7 @@ export function renderProducts(products) {
                 <div class="add-to-cart-toast js-add-to-cart-toast-${
                   product.id
                 }">
-                    <img src="images/icons/checkmark.png" alt=""> Added
+                    <img src="/images/icons/checkmark.png" alt=""> Added
                 </div>
                 <div class="add-to-cart-button js-add-to-cart" data-product-id="${
                   product.id

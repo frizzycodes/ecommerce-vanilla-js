@@ -28,7 +28,7 @@ function renderTracking(data) {
   const trackingMainElm = getTrackingMain();
   let trackingMainHtml = `
   <section class="order-tracking">
-    <a class="back-to-orders-link" href="orders.html">
+    <a class="back-to-orders-link" href="/orders.html">
       View all orders
     </a>
 
@@ -44,7 +44,7 @@ function renderTracking(data) {
 
     <img
       class="product-image"
-      src="${data.product.image}"
+      src="/${data.product.image}"
     />
 
     <div class="progress-labels-container">
