@@ -49,7 +49,7 @@ class Cart {
   }
   async loadCart() {
     try {
-      const res = await fetch("http://localhost:3000/api/cart");
+      const res = await fetch("/api/cart");
       // HTTP error handling (xhr.status check)
       if (!res.ok) {
         throw new Error(`Failed to load cart (${res.status})`);
@@ -67,7 +67,7 @@ class Cart {
   }
   async saveCart() {
     try {
-      const res = await fetch("http://localhost:3000/api/cart", {
+      const res = await fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items: this.cartItems }),

@@ -22,7 +22,7 @@ export class Product {
     this.priceCents = productDetails.priceCents;
     this.keywords = productDetails.keywords;
   }
-  getRaitingStarsUrl() {
+  getRatingStarsUrl() {
     return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
   getPrice() {
@@ -77,7 +77,7 @@ export function loadProducts() {
       reject(new Error("Failed to load products"));
     });
     xhr.responseType = "json";
-    xhr.open("GET", "http://localhost:3000/api/products");
+    xhr.open("GET", "/api/products");
     xhr.send();
   });
 }

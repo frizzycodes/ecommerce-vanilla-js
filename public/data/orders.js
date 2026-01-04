@@ -104,7 +104,7 @@ export async function placeOrder(cart) {
 }
 async function postOrder(order) {
   try {
-    const res = await fetch("http://localhost:3000/api/orders", {
+    const res = await fetch("/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(order),
@@ -121,7 +121,7 @@ async function postOrder(order) {
 }
 export async function fetchOrders() {
   try {
-    const res = await fetch("http://localhost:3000/api/orders");
+    const res = await fetch("/api/orders");
     // HTTP error handling (xhr.status check)
     if (!res.ok) {
       throw new Error(`Failed to load orders (${res.status})`);

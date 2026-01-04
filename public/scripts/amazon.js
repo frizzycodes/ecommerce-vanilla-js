@@ -41,7 +41,7 @@ export function renderProducts(products) {
                     ${product.name}
                 </div>
                 <div class="product-raiting-container">
-                    <img class="product-raiting-stars" src="${product.getRaitingStarsUrl()}" alt="">
+                    <img class="product-raiting-stars" src="${product.getRatingStarsUrl()}" alt="">
                     <div class="product-raiting-count">
                         ${product.rating.count}
                     </div>
