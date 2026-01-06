@@ -1,8 +1,10 @@
 import http from "http";
 import fs from "fs/promises";
-import fsSync from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { connectDB, db } from "./db.js";
+
+await connectDB();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,13 +92,16 @@ const server = http.createServer(async (req, res) => {
     req.on("end", async () => {
       try {
         const cartData = JSON.parse(body);
-        const cartPath = path.join(
-          __dirname,
-          "data",
-          "carts",
-          `${sessionId}.json`
+        await db.collection("carts").updateOne(
+          { sessionId },
+          {
+            $set: {
+              items: cartData.items,
+              updatedAt: new Date(),
+            },
+          },
+          { upsert: true }
         );
-        await fs.writeFile(cartPath, JSON.stringify(cartData, null, 2));
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: true }));
       } catch {
@@ -109,38 +114,21 @@ const server = http.createServer(async (req, res) => {
 
   // CART GET
   if (req.method === "GET" && req.url === "/api/cart") {
-    const cartPath = path.join(__dirname, "data", "carts", `${sessionId}.json`);
-
-    if (!fsSync.existsSync(cartPath)) {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ items: [] }));
-      return;
-    }
-
-    const cartData = await fs.readFile(cartPath, "utf-8");
+    const cartData = await db.collection("carts").findOne({ sessionId });
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(cartData);
+    res.end(JSON.stringify(cartData ?? { items: [] }));
     return;
   }
 
   // ORDERS GET
   if (req.method === "GET" && req.url === "/api/orders") {
-    const ordersPath = path.join(
-      __dirname,
-      "data",
-      "orders",
-      `${sessionId}.json`
-    );
-
-    if (!fsSync.existsSync(ordersPath)) {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ orders: [] }));
-      return;
-    }
-
-    const ordersData = await fs.readFile(ordersPath, "utf-8");
+    const ordersData = await db
+      .collection("orders")
+      .find({ sessionId })
+      .sort({ createdTime: -1 })
+      .toArray();
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(ordersData);
+    res.end(JSON.stringify({ orders: ordersData }));
     return;
   }
 
@@ -151,25 +139,16 @@ const server = http.createServer(async (req, res) => {
     req.on("end", async () => {
       try {
         const newOrder = JSON.parse(body);
-        newOrder["orderId"] = crypto.randomUUID();
-        const ordersPath = path.join(
-          __dirname,
-          "data",
-          "orders",
-          `${sessionId}.json`
-        );
-
-        let ordersData = { orders: [] };
-        if (fsSync.existsSync(ordersPath)) {
-          ordersData = JSON.parse(await fs.readFile(ordersPath, "utf-8"));
-        }
-
-        ordersData.orders.push(newOrder);
-
-        await fs.writeFile(ordersPath, JSON.stringify(ordersData, null, 2));
+        const orderId = crypto.randomUUID();
+        await db.collection("orders").insertOne({
+          ...newOrder,
+          sessionId,
+          orderId,
+          createdTime: new Date(),
+        });
 
         res.writeHead(201, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ orderId: newOrder.orderId, success: true }));
+        res.end(JSON.stringify({ orderId, success: true }));
       } catch {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: false }));
