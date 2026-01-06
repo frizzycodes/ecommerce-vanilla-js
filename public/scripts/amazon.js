@@ -117,7 +117,6 @@ function setupAmazonPage() {
   const amazonHeader = getAmazonHeader();
   const form = document.querySelector(".js-search-form");
   const cartQuantityElem = document.querySelector(".js-cart-quantity");
-  cart.updateCartQuantity(cartQuantityElem);
   if (productsGrid) {
     productsGrid.addEventListener("click", handleProductGridClick);
   }
@@ -156,6 +155,10 @@ function setupAmazonPage() {
     } else {
       renderProducts(products);
     }
+  });
+  window.addEventListener("pageshow", async () => {
+    await cart.loadCart();
+    cart.updateCartQuantity(document.querySelector(".js-cart-quantity"));
   });
 }
 async function initAmazonPage() {
