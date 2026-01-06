@@ -26,11 +26,11 @@ function setupCheckout() {
   cartSummary.addEventListener("keydown", handleCartSummaryKeyDown);
 }
 
-async function inntCheckout() {
+async function initCheckout() {
   await Promise.all([loadProducts(), cart.loadCart()]);
   if (document.querySelector(".js-cart-summary")) {
     setupCheckout();
     refreshCheckout();
   }
 }
-inntCheckout();
+initCheckout();

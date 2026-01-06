@@ -7,12 +7,24 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, "public"); // frontend root folder
-
+function getSessionId(req, res) {
+  const cookie = req.headers.cookie || "";
+  const match = cookie.match(/sessionId=([^;]+)/);
+  if (match) {
+    return match[1];
+  }
+  const sessionId = crypto.randomUUID();
+  res.setHeader(
+    "Set-Cookie",
+    `sessionId=${sessionId};Path=/;HttpOnly;Secure;Max-Age=2592000;SameSite=Lax;`
+  );
+  return sessionId;
+}
 const server = http.createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
+  const sessionId = getSessionId(req, res);
   if (req.method === "OPTIONS") {
     res.writeHead(204);
     res.end();
@@ -26,7 +38,7 @@ const server = http.createServer(async (req, res) => {
     let safePath = pathname;
 
     if (pathname === "/" || pathname === "/amazon") {
-      safePath = "/amazon.html";
+      safePath = "/index.html";
     } else if (pathname === "/tracking") {
       safePath = "/tracking.html";
     }
@@ -53,7 +65,7 @@ const server = http.createServer(async (req, res) => {
       });
       res.end(data);
     } catch {
-      const html = await fs.readFile(path.join(publicDir, "amazon.html"));
+      const html = await fs.readFile(path.join(publicDir, "index.html"));
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(html);
     }
@@ -78,7 +90,12 @@ const server = http.createServer(async (req, res) => {
     req.on("end", async () => {
       try {
         const cartData = JSON.parse(body);
-        const cartPath = path.join(__dirname, "data", "cart.json");
+        const cartPath = path.join(
+          __dirname,
+          "data",
+          "carts",
+          `${sessionId}.json`
+        );
         await fs.writeFile(cartPath, JSON.stringify(cartData, null, 2));
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: true }));
@@ -92,7 +109,7 @@ const server = http.createServer(async (req, res) => {
 
   // CART GET
   if (req.method === "GET" && req.url === "/api/cart") {
-    const cartPath = path.join(__dirname, "data", "cart.json");
+    const cartPath = path.join(__dirname, "data", "carts", `${sessionId}.json`);
 
     if (!fsSync.existsSync(cartPath)) {
       res.writeHead(200, { "Content-Type": "application/json" });
@@ -108,7 +125,12 @@ const server = http.createServer(async (req, res) => {
 
   // ORDERS GET
   if (req.method === "GET" && req.url === "/api/orders") {
-    const ordersPath = path.join(__dirname, "data", "orders.json");
+    const ordersPath = path.join(
+      __dirname,
+      "data",
+      "orders",
+      `${sessionId}.json`
+    );
 
     if (!fsSync.existsSync(ordersPath)) {
       res.writeHead(200, { "Content-Type": "application/json" });
@@ -130,7 +152,12 @@ const server = http.createServer(async (req, res) => {
       try {
         const newOrder = JSON.parse(body);
         newOrder["orderId"] = crypto.randomUUID();
-        const ordersPath = path.join(__dirname, "data", "orders.json");
+        const ordersPath = path.join(
+          __dirname,
+          "data",
+          "orders",
+          `${sessionId}.json`
+        );
 
         let ordersData = { orders: [] };
         if (fsSync.existsSync(ordersPath)) {

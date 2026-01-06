@@ -144,9 +144,12 @@ function setupAmazonPage() {
       updateSearchParam(query);
     });
   }
-  window.addEventListener("popstate", () => {
+  window.addEventListener("popstate", async () => {
+    await cart.loadCart(); // re-read from storage / backend
+    cart.updateCartQuantity(document.querySelector(".js-cart-quantity"));
     const params = new URLSearchParams(window.location.search);
     const query = params.get("search");
+    console.log("POPPEd");
 
     if (query) {
       searchAndRenderProducts(query);
@@ -155,7 +158,7 @@ function setupAmazonPage() {
     }
   });
 }
-async function inntAmazonPage() {
+async function initAmazonPage() {
   await Promise.all([loadProducts(), cart.loadCart()]);
 
   const params = new URLSearchParams(window.location.search);
@@ -169,4 +172,4 @@ async function inntAmazonPage() {
   setupAmazonPage();
 }
 
-inntAmazonPage();
+initAmazonPage();

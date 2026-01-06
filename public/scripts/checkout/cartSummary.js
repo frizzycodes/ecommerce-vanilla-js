@@ -16,7 +16,7 @@ export function renderCartSummary() {
             <div>
                 Your cart is empty.
             </div>
-            <a class="view-products-link" href="amazon.html">
+            <a class="view-products-link" href="/index.html">
                 View products
             </a>
         `;
