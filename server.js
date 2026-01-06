@@ -3,8 +3,16 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import { connectDB, db } from "./db.js";
+import crypto from "crypto";
 
-await connectDB();
+(async () => {
+  try {
+    await connectDB();
+    console.log("MongoDB ready");
+  } catch (err) {
+    console.error("MongoDB failed:", err);
+  }
+})();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +26,7 @@ function getSessionId(req, res) {
   const sessionId = crypto.randomUUID();
   res.setHeader(
     "Set-Cookie",
-    `sessionId=${sessionId};Path=/;HttpOnly;Secure;Max-Age=2592000;SameSite=Lax;`
+    `sessionId=${sessionId};Path=/;HttpOnly;Max-Age=2592000;SameSite=Lax;`
   );
   return sessionId;
 }
