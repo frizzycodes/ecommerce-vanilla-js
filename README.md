@@ -4,6 +4,8 @@ This is my **first complete full-stack project**, an Amazon-style e-commerce app
 
 The goal was not UI polish — it was to deeply understand **how browsers, servers, sessions, and databases actually work in production**.
 
+https://ecommerce-vanilla-js.onrender.com
+
 ---
 
 ## ✨ Features
