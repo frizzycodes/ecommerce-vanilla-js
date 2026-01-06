@@ -9,14 +9,13 @@ const client = new MongoClient(process.env.MONGO_URI, {
   },
 });
 
-export const db = client.db("ecommerce");
+export let db;
 
 export async function connectDB() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    console.log("MongoDB connected");
-  } catch (err) {
-    console.log("Error:", err);
-  }
+  if (db) return db; // reuse connection
+  // Connect the client to the server	(optional starting in v4.7)
+  await client.connect();
+  db = client.db("ecommerce");
+  console.log("MongoDB connected");
+  return db;
 }
